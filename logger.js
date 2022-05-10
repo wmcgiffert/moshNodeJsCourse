@@ -27,6 +27,9 @@
 // logger.log('Hello is it me youre looking for?');
 
 var log = require('./modules');
+console.log(__filename);
+console.log(__dirname);
+
 
 log('Hello? Is it me youre looking for?');
 
