@@ -8,4 +8,4 @@
 
 // only global in this file 
 var message = "global";
-console.log(global.message); 
+console.log(global.message); //undefined 
