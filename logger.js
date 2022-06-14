@@ -31,7 +31,7 @@ console.log(__filename);
 console.log(__dirname);
 
 
-log('Hello? Is it me youre looking for?');
+console.log('Hello? Is it me youre looking for?');
 
 
 
