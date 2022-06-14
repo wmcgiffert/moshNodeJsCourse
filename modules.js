@@ -9,5 +9,6 @@ function log(message){
 
 //packages functions/variables for export and makes them global
 module.exports.log = log;
-module.exports.url = url;
+//Can change the name of the export. Does not have to match the var or function it exports
+module.exports.endPoint = url;
 module.exports = log;
