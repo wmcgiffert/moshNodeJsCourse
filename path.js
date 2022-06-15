@@ -1,16 +1,15 @@
-// function SayHello(name){
-//     console.log('Hello ' + name);
-// }
+const os = require('os');
 
-// SayHello('Garrett McGiffert');
-
-// const logger = require('./logger');
-// console.log(logger);
-// logger.log('Hello there Garrett you should get to bed soon!');
+var osObj = os.totalmem();
+var osObj2 = os.freemem();
+console.log(`Total Memory: ${osObj} \n Free Memory: ${osObj2}`);
 
 
-const log = require('./logger');
+// const path = require('path');
 
-log('Hello there Garrett you should get to bed soon!');
+// var pathObj = path.parse(__filename); 
+// console.log(pathObj);
 
-
+// var modules = require('./modules');
+// console.log(modules);
+// modules('used log function'); 
