@@ -27,12 +27,17 @@
 // logger.log('Hello is it me youre looking for?');
 
 var log = require('./modules');
-console.log(__filename);
-console.log(__dirname);
+function path(){
+    console.log(__filename);
+    console.log(__dirname);
+    console.log('Loading modules....');
+}
 
-
-console.log('Hello? Is it me youre looking for?');
-
-
+function logs(){
+    console.log('Loading Logger'); 
+}
+module.exports.logs = logs;
+module.exports.path = path; 
+module.exports; 
 
 
