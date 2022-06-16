@@ -2,7 +2,7 @@ const { EventEmitter } = require('events');
 const emitter = new EventEmitter();
 
 //Register a listener *Register must come first* if it was after the Signaler would have signaled to nothing  
-emitter.on('messageLogged', function(arg){
+emitter.on('messageLogged', (arg)=>{
     console.log(arg);
 });
 
