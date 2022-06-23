@@ -9,6 +9,10 @@ const webServer = http.createServer((req, res)=>{
         res.write('<p>Hello World</p>');
         res.end();
     }
+    if(req.url === '/api/courses'){
+        res.write(JSON.stringify([1, 2, 3,4,5,6,7,8,9,0]));
+        res.end();
+    }
 });
 
 console.log(webServer); 
