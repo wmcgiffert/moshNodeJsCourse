@@ -17,6 +17,3 @@ logger.log('message');
 //Signalling that an event has happened
 //Raised an event but has to have a emitter to listen
 // emitter.emit('messageLogged', { id: 1, url: 'http://' });
-
-
-
