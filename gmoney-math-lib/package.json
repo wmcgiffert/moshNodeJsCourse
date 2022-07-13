@@ -1,5 +1,5 @@
 {
-  "name": "gmoney-lib",
+  "name": "gmoney-addition-lib",
   "version": "1.1.0",
   "description": "",
   "main": "index.js",
@@ -8,8 +8,5 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "gmoney-addition-lib": "^1.0.0"
-  }
+  "license": "ISC"
 }

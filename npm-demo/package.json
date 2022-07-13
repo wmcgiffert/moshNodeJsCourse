@@ -9,7 +9,9 @@
   "author": "William Garrett McGiffert",
   "license": "ISC",
   "dependencies": {
-    "mongoose": "^6.4.1",
     "underscore": "^1.13.4"
+  },
+  "devDependencies": {
+    "jshint": "^2.13.5"
   }
 }

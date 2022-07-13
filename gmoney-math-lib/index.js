@@ -1,0 +1,2 @@
+module.exports.add = function(a,b) {return `${a} + ${b} = ${a+b} gmoney bucks!`};
+module.exports.multiply = function(a,b) {return `You just multiplied ${a} and ${b} to get a total of ${a*b} gmoney bucks!`};
