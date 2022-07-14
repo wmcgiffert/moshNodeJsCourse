@@ -6,11 +6,15 @@ app.get('/', (req,res) => {
 });
 
 app.get('/api/courses', (req, res) => {
-    res.send([1, 2, 3, 4]);
+    res.send([1, 2, 3]);
 })
 
 
 // app.post();
 // app.delete();
 // app.put();
-app.listen(3000, ()=> console.log('Listening on port 3000'));
+
+//PORT
+const portNum = 3000;
+process.env.PORT || portNum;
+app.listen(portNum, ()=> console.log(`Listening on port ${portNum}...`));
