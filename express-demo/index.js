@@ -11,7 +11,7 @@ const courses = [
     },
     {
         id: 2,
-        name: 'MAcc'
+        name: 'Enterprise Application Development'
     },
     {
         id: 3,
@@ -37,16 +37,17 @@ app.get('/api/courses/:id', (req,res) => {
 //Post Routes
 app.post('/api/courses', (req,res) => {
 
-    //creates the schema
-    const schema = Joi.object({
-        name: Joi.string().min(3).required()
-    });
+    const { error } = validateCourse(req.body);
+    // //creates the schema
+    // const schema = Joi.object({
+    //     name: Joi.string().min(3).required()
+    // });
     
-    //assign schema
-    const result = schema.validate(req.body);
+    // //assign schema
+    // const result = schema.validate(req.body);
     
     //validates the schema
-    if(result.error){
+    if(error){
         res.status(400).send(result.error.message);
         return;
     }
@@ -70,13 +71,15 @@ app.put('/api/courses/:id', (req,res) => {
     if(!course) res.status(404).send('The course with the given id was not found');
 
     //Validate
-    const schema = Joi.object({
-        name: Joi.string().min(3).required()
-    })
-    const result = schema.validate(req.body);
+    const { error } = validateCourse(req.body);
+    //Old way
+    // const schema = Joi.object({
+    //     name: Joi.string().min(3).required()
+    // })
+    // const result = schema.validate(req.body);
     
     //If invalid, return 400 - Bad Request
-    if(result.error){
+    if(error){
         res.status(400).send('Invalid Course please input valid course'); 
         return;
     }
@@ -88,6 +91,12 @@ app.put('/api/courses/:id', (req,res) => {
     res.send(courses);
 })
 
+function validateCourse(course){
+    const schema = Joi.object({
+        name: Joi.string().min(3).required()
+    });
+    return result = schema.validate(course);
+}
 //PORT
 const portNum = process.env.PORT || 3000;
 app.listen(portNum, ()=> console.log(`Listening on port ${portNum}...`));
