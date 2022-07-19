@@ -19,6 +19,7 @@ const courses = [
     },
 ]
 
+//Get Routes
 app.get('/', (req,res) => {
     res.send('Hello World!!!!!!!');
 });
@@ -27,6 +28,13 @@ app.get('/api/courses', (req, res) => {
     res.send(courses);
 })
 
+app.get('/api/courses/:id', (req,res) => {
+    let course = courses.find(c=> c.id === parseInt(req.params.id));
+    if(!course) res.status(404).send('The course with the given id was not found');
+    res.send(course);
+})
+
+//Post Routes
 app.post('/api/courses', (req,res) => {
 
     //creates the schema
@@ -54,12 +62,31 @@ app.post('/api/courses', (req,res) => {
     res.send(courses); 
 })
 
-app.get('/api/courses/:id', (req,res) => {
+//Put Routes
+app.put('/api/courses/:id', (req,res) => {
+    //Look up the course
     let course = courses.find(c=> c.id === parseInt(req.params.id));
+    //If not existing, return 404
     if(!course) res.status(404).send('The course with the given id was not found');
-    res.send(course);
-})
 
+    //Validate
+    const schema = Joi.object({
+        name: Joi.string().min(3).required()
+    })
+    const result = schema.validate(req.body);
+    
+    //If invalid, return 400 - Bad Request
+    if(result.error){
+        res.status(400).send('Invalid Course please input valid course'); 
+        return;
+    }
+
+    //Update course
+    course.name = req.body.name;
+
+    //Return the updated course
+    res.send(courses);
+})
 
 //PORT
 const portNum = process.env.PORT || 3000;
