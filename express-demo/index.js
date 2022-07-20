@@ -20,14 +20,15 @@ const courses = [
 ]
 
 //Get Routes
+//home api
 app.get('/', (req,res) => {
     res.send('Hello World!!!!!!!');
 });
-
+//get all the courses
 app.get('/api/courses', (req, res) => {
     res.send(courses);
 })
-
+//get a singel course
 app.get('/api/courses/:id', (req,res) => {
     let course = courses.find(c=> c.id === parseInt(req.params.id));
     if(!course) return res.status(404).send('The course with the given id was not found');
@@ -35,6 +36,7 @@ app.get('/api/courses/:id', (req,res) => {
 })
 
 //Post Routes
+//create a new course 
 app.post('/api/courses', (req,res) => {
     //validates the schema
     const { error } = validateCourse(req.body);    
@@ -52,6 +54,7 @@ app.post('/api/courses', (req,res) => {
 })
 
 //Put Routes
+//Edit an existing course
 app.put('/api/courses/:id', (req,res) => {
     //Look up the course
     let course = courses.find(c=> c.id === parseInt(req.params.id));
@@ -70,6 +73,8 @@ app.put('/api/courses/:id', (req,res) => {
     res.send(courses);
 })
 
+//Delete Route
+//Delete a Course
 app.delete('/api/courses/:id', (req,res) => {
     //Look up the course if doesnt exist return 404
     const course = courses.find(c => c.id === parseInt(req.params.id)); 
