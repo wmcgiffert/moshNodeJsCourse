@@ -36,17 +36,8 @@ app.get('/api/courses/:id', (req,res) => {
 
 //Post Routes
 app.post('/api/courses', (req,res) => {
-
-    const { error } = validateCourse(req.body);
-    // //creates the schema
-    // const schema = Joi.object({
-    //     name: Joi.string().min(3).required()
-    // });
-    
-    // //assign schema
-    // const result = schema.validate(req.body);
-    
     //validates the schema
+    const { error } = validateCourse(req.body);    
     if(error){
         res.status(400).send(result.error.message);
         return;
@@ -67,18 +58,12 @@ app.post('/api/courses', (req,res) => {
 app.put('/api/courses/:id', (req,res) => {
     //Look up the course
     let course = courses.find(c=> c.id === parseInt(req.params.id));
+
     //If not existing, return 404
     if(!course) res.status(404).send('The course with the given id was not found');
 
     //Validate
     const { error } = validateCourse(req.body);
-    //Old way
-    // const schema = Joi.object({
-    //     name: Joi.string().min(3).required()
-    // })
-    // const result = schema.validate(req.body);
-    
-    //If invalid, return 400 - Bad Request
     if(error){
         res.status(400).send('Invalid Course please input valid course'); 
         return;
