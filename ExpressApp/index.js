@@ -8,14 +8,16 @@ app.use(express.json());
 const genres = [
     {id:1,"genre":"horror"},
     {id:2,"genre":"action"},
-    {id:3,"genre":"comdey"}
+    {id:3,"genre":"comedy"}
 ]
 
 //Get
+//Get all the genres
 app.get('/api/genres', (req,res)=>{
     res.send(genres);
 })
 
+//Get a single genre
 app.get('/api/genres/:id', (req, res)=>{
     const genre = genres.find(g => g.id === parseInt(req.params.id));
     if(!genre) return req.status(404).send('Could not locate a genre with {0} id', req.params);
@@ -24,9 +26,11 @@ app.get('/api/genres/:id', (req, res)=>{
     res.send(genre);
 })
 
+//Post routes
+//Post a new genre
 app.post('/api/genres', (req, res) =>{
-    const { error } =validateCourse(req.body);
-    if(error) return res.status(404).send()
+    const { error } = validateCourse(req.body);
+    if(error) return res.status(404).send('Please check the object structure.');
 
     const genre = {
         id: genres.length + 1,
@@ -37,20 +41,42 @@ app.post('/api/genres', (req, res) =>{
     res.send(genres);
 })
 
+//Put routes
+//Edit a single genre
 app.put('/api/genres/:id', (req, res) =>{
+    const { error } = validateCourse(req.body);
+    if(error) return res.status(404).send()
 
+    const genre = genres.find(g => g.id === parseInt(req.params.id));
+    if(!genre) return req.status(404).send('Could not locate a genre with {0} id', req.params);
+
+    genre.name = req.body.name; 
+
+    res.send(genres); 
+ 
 })
 
+//Delete routs
+//Delete a single genre
 app.delete('/api/genres/:id', (req,res)=>{
+    const genre = genres.find(g => g.id === parseInt(req.params.id));
+    if(!genre) return res.status(404).send('The genre with the given ID was not found'); 
+    
+    const index = genres.indexOf(genre); 
 
+    genres.splice(index,1);
+
+    res.send(genres);
 })
 
 
-function validateCourse(course){
+
+//private/public functions
+function validateCourse(genre){
     const schema = Joi.object({
-        name: Joi.string().min(3).required()
+        genre: Joi.string().min(3).required()
     });
-    return result = schema.validate(course);
+    return result = schema.validate(genre);
 }
 
 const portNum =process.env.PORT || 3000;
