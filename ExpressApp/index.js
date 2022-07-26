@@ -6,9 +6,15 @@ app.use(express.json());
 
 
 const genres = [
-    {id:1,"genre":"horror"},
-    {id:2,"genre":"action"},
-    {id:3,"genre":"comedy"}
+    {
+        id:1,"genre":"horror"
+    },
+    {
+        id:2,"genre":"action"
+    },
+    {
+        id:3,"genre":"comedy"
+    }
 ]
 
 //Get
@@ -44,16 +50,17 @@ app.post('/api/genres', (req, res) =>{
 //Put routes
 //Edit a single genre
 app.put('/api/genres/:id', (req, res) =>{
+    let genre = genres.find(g => g.id === parseInt(req.params.id));
+    const id = req.params.id;
+    if(!genre) return res.status(404).send(`Could not locate a genre with ${id} id`);
+    
+    
     const { error } = validateCourse(req.body);
-    if(error) return res.status(404).send()
+    if(error) return res.status(404).send('Invalid genre object please input valid course object')
 
-    const genre = genres.find(g => g.id === parseInt(req.params.id));
-    if(!genre) return req.status(404).send('Could not locate a genre with {0} id', req.params);
-
-    genre.name = req.body.name; 
-
+    genre.genre = req.body.genre; 
+  
     res.send(genres); 
- 
 })
 
 //Delete routs
@@ -80,4 +87,4 @@ function validateCourse(genre){
 }
 
 const portNum =process.env.PORT || 3000;
-app.listen(portNum, ()=> console.log(`Listening on port ${portNum}.....`));
+app.listen(portNum, ()=> console.log(`Listening on port ${portNum}.....`)); 
