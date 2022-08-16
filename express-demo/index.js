@@ -2,13 +2,14 @@ const Joi = require('joi');
 const logger = require('./logger');
 const express = require('express');
 const auth = require('./auth');
+const { default: helmet } = require('helmet');
 const app = express();
 
 app.use(express.json()); 
 app.use(auth.authentication); 
-app.use(auth.authentication2); 
+// app.use(auth.authentication2); 
 app.use(logger);
-
+app.use(helmet());
 
 
 
@@ -99,12 +100,18 @@ app.delete('/api/courses/:id', (req,res) => {
     res.send(courses); 
 })
 
+
+//Schemas 
+
+//Course needs a name thats at least 3 letters long and is required
 function validateCourse(course){
     const schema = Joi.object({
         name: Joi.string().min(3).required()
     });
     return result = schema.validate(course);
 }
+
+
 //PORT
 const portNum = process.env.PORT || 3000;
 app.listen(portNum, ()=> console.log(`Listening on port ${portNum}...`));
