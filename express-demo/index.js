@@ -1,9 +1,11 @@
+const config = require('config');
 const express = require('express');
 const Joi = require('joi');
 const { default: helmet } = require('helmet');
 const morgan = require('morgan');
 const logger = morgan('combined');
 const auth = require('./auth');
+const { required } = require('joi');
 
 const app = express();
 
@@ -17,7 +19,13 @@ app.use(express.static('public'));
 app.use(auth.authentication); 
 app.use(helmet());
 
-//only logs in teh dev env
+
+
+console.log('Application Name: ' + config.get('name'));
+console.log('Mail Server: ' + config.get('mail.host'));
+// console.log('Mail Password: ' + config.get('mail.password')); will display the password for the mail server
+
+//only logs in the dev env
 if(app.get('env') === 'development'){
     app.use(logger);
     console.log('Morgan enabled...');
