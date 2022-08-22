@@ -6,6 +6,8 @@ const morgan = require('morgan');
 const logger = morgan('combined');
 const auth = require('./auth');
 const { required } = require('joi');
+const startUpDebugger = require('debug')('app:startup');
+const DbDebugger = require('debug')('app:db');
 
 const app = express();
 
@@ -28,9 +30,16 @@ console.log('Mail Server: ' + config.get('mail.host'));
 //only logs in the dev env
 if(app.get('env') === 'development'){
     app.use(logger);
-    console.log('Morgan enabled...');
+    startUpDebugger('Morgan enabled...');
 }
 
+//Db work.....
+DbDebugger('Connected to the database');
+
+
+//PORT
+const portNum = process.env.PORT || 3000;
+app.listen(portNum, ()=> console.log(`Listening on port ${portNum}...`));
 
 
 const courses = [
@@ -131,8 +140,3 @@ function validateCourse(course){
     });
     return result = schema.validate(course);
 }
-
-
-//PORT
-const portNum = process.env.PORT || 3000;
-app.listen(portNum, ()=> console.log(`Listening on port ${portNum}...`));
