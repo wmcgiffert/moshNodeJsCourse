@@ -1,16 +1,27 @@
-const Joi = require('joi');
-const logger = require('./logger');
 const express = require('express');
-const auth = require('./auth');
+const Joi = require('joi');
 const { default: helmet } = require('helmet');
+const morgan = require('morgan');
+const logger = morgan('combined');
+const auth = require('./auth');
+
 const app = express();
 
-app.use(express.json()); 
+// console.log(`NODE_ENV: ${process.env.NODE_ENV}`); //not set will return undefined
+// app.get('env');
+// console.log(`app: ${app.get('env')}`);
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(express.static('public'));
 app.use(auth.authentication); 
-// app.use(auth.authentication2); 
-app.use(logger);
 app.use(helmet());
 
+//only logs in teh dev env
+if(app.get('env') === 'development'){
+    app.use(logger);
+    console.log('Morgan enabled...');
+}
 
 
 
@@ -32,8 +43,10 @@ const courses = [
 //Get Routes
 //home api
 app.get('/', (req,res) => {
-    res.send('Hello World!!!!!!!');
+    res.send('<h1>Welcome to Garrett\'s Node.js project</h1> <h2>Here are my projects:</h2><ol><li>www.thesocialbook.com</li></ol');
 });
+
+
 //get all the courses
 app.get('/api/courses', (req, res) => {
     res.send(courses);
