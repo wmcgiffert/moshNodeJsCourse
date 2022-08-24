@@ -25,7 +25,7 @@ app.use(helmet());
 
 console.log('Application Name: ' + config.get('name'));
 console.log('Mail Server: ' + config.get('mail.host'));
-// console.log('Mail Password: ' + config.get('mail.password')); will display the password for the mail server
+// console.log('Mail Password: ' + config.get('mail.password')); //will display the password for the mail server
 
 //only logs in the dev env
 if(app.get('env') === 'development'){
