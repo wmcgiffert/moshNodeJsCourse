@@ -15,6 +15,9 @@ const app = express();
 // app.get('env');
 // console.log(`app: ${app.get('env')}`);
 
+app.set('view engine','pug');
+app.set('views', './views'); //default setting means all views should be in a folder called views at the root of project
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
@@ -60,7 +63,8 @@ const courses = [
 //Get Routes
 //home api
 app.get('/', (req,res) => {
-    res.send('<h1>Welcome to Garrett\'s Node.js project</h1> <h2>Here are my projects:</h2><ol><li>www.thesocialbook.com</li></ol');
+    // res.send('<h1>Welcome to Garrett\'s Node.js project</h1> <h2>Here are my projects:</h2><ol><li>www.thesocialbook.com</li></ol');
+    res.render('index',{title: 'My Express App', message: 'Hello World'});
 });
 
 
