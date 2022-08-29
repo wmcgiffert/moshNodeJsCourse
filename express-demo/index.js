@@ -5,7 +5,7 @@ const courses = require('./routes/courses');
 const home = require('./routes/home');
 const morgan = require('morgan');
 const logger = morgan('combined');
-const auth = require('./auth');
+const auth = require('./middleware/auth');
 const startUpDebugger = require('debug')('app:startup');
 const DbDebugger = require('debug')('app:db');
 
