@@ -4,13 +4,13 @@ const Joi = require('joi');
 
 const genres = [
     {
-        id:1,"genre":"horror"
+        id:1,"genre":"Horror"
     },
     {
-        id:2,"genre":"action"
+        id:2,"genre":"Action"
     },
     {
-        id:3,"genre":"comedy"
+        id:3,"genre":"Romance"
     }
 ]
 
