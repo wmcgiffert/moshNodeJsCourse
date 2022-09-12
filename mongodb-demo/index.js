@@ -10,7 +10,7 @@ const cousreSchema = new mongoose.Schema({
     tags: [String],
     date: {type: Date, default: Date.now},
     isPublished: Boolean
-})
+});
 
 const Course = mongoose.model('Course', cousreSchema);
 
@@ -27,4 +27,4 @@ async function createCourse(){
     console.log(result);
 }
 
-createCourse();
+createCourse();  
