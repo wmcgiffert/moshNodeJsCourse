@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://wgmMoshApp:wgmMoshApp@mernmoshapp.bxgpy2d.mongodb.net/?retryWrites=true&w=majority');
-//     .then(() => console.log('Connected to MongoDB....'))
-//     // .catch(err => console.error('Could not connect to MongoDb', err));
+mongoose.connect('mongodb+srv://wgmMoshApp:wgmMoshApp@mernmoshapp.bxgpy2d.mongodb.net/?retryWrites=true&w=majority')
+    .then(() => console.log('Connected to MongoDB....'))
+    .catch(err => console.error('Could not connect to MongoDb', err));
 
 
-const cousreSchema = new mongoose.Schema({
+const courseSchema = new mongoose.Schema({
     name: String,
     author: String,
     tags: [String],
@@ -13,14 +13,14 @@ const cousreSchema = new mongoose.Schema({
     isPublished: Boolean
 });
 
-const Course = mongoose.model('Course', cousreSchema);
+const Course = mongoose.model('Course', courseSchema);
 
 async function createCourse(){
     
     const course = new Course({
         name: 'Mosh Node.js Course',
         author: 'Garrett',
-        tags: ['node', 'backend'],
+        tags: ['react', 'frontend'],
         isPublished: true
     });
 
@@ -28,4 +28,10 @@ async function createCourse(){
     console.log(result);
 }
 
-createCourse();  
+async function getCourses(){
+    const courses = await Course.find({author: 'Garrett', isPublished: true, tags: 'backend'});
+    console.log(courses);
+}
+
+getCourses();
+// createCourse();  
