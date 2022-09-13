@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/playground')
-    .then(() => console.log('Connected to MongoDB....'))
-    .catch(err => console.error('Could not connect to MongoDb', err));
+mongoose.connect('mongodb+srv://wgmMoshApp:wgmMoshApp@mernmoshapp.bxgpy2d.mongodb.net/?retryWrites=true&w=majority');
+//     .then(() => console.log('Connected to MongoDB....'))
+//     // .catch(err => console.error('Could not connect to MongoDb', err));
+
 
 const cousreSchema = new mongoose.Schema({
     name: String,
