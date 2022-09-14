@@ -2,15 +2,14 @@ const mongoose = require('mongoose');
 
 // Mongo filter words
 /* 
-eq (equal)
-ne (not equal)
-gt (greater than)
-gte (greater or than equal to)
-lt (less than)
-lte (less than or equal to)
-in (in)
-nin (not in)
-
+    eq (equal)
+    ne (not equal)
+    gt (greater than)
+    gte (greater or than equal to)
+    lt (less than)
+    lte (less than or equal to)
+    in (in)
+    nin (not in)
 
 */
 
