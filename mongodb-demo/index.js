@@ -10,9 +10,22 @@ const mongoose = require('mongoose');
     lte (less than or equal to)
     in (in)
     nin (not in)
-
 */
 
+// Logical Operators
+/* 
+    or()
+    and()
+*/
+
+// Search a string
+/* 
+    /^____/ starts with
+    /____$/ ends with
+    /____$/i case insensative
+    /.*____.* / contains 
+
+*/
 
 mongoose.connect('mongodb+srv://wgmMoshApp:wgmMoshApp@mernmoshapp.bxgpy2d.mongodb.net/?retryWrites=true&w=majority')
     .then(() => console.log('Connected to MongoDB....'))
@@ -41,11 +54,24 @@ async function createCourse(){
 }
 
 async function getCourses(){
+
+    const pageNumber = 2;
+    const pageSize = 10; 
     const courses = await Course
         .find({author: 'Garrett', isPublished: true})
-        .limit(3)
+        // .or({author: 'Garrett'}, {isPublished: true})
+        // .and([])
+        // .find({price: {$gte: 10, $lte: 20} })
+        // .find({ price: {$in: [10,15,20] } })
+        // .find({author: /^ Garrett/} //starts with Garrett
+        // .find({author: /Garrett$/}) //Ends with Garrett
+        // .find({author: /Garrett$/i}) //Ends with Garrett and is case insensative
+        // .find({author: /.*Garrett.*/i}) //Contains Garrett
+        // .skip((pageNumber -1) * pageSize)) 
+        // .limit(pageSize)
         .sort({name:1})
         .select({name:1, tags:1});
+        // .count() //gets the number of records
     console.log(courses);
 }
 
