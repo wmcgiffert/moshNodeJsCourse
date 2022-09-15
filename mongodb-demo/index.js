@@ -27,7 +27,14 @@ const mongoose = require('mongoose');
 
 */
 
-mongoose.connect('mongodb+srv://wgmMoshApp:wgmMoshApp@mernmoshapp.bxgpy2d.mongodb.net/?retryWrites=true&w=majority')
+const currentDB = 'test';
+// const currentDB = 'mongo-exercise';
+
+const db = 'mongodb+srv://wgmMoshApp:wgmMoshApp@mernmoshapp.bxgpy2d.mongodb.net/' + currentDB
+console.log(db);
+
+
+mongoose.connect(db)
     .then(() => console.log('Connected to MongoDB....'))
     .catch(err => console.error('Could not connect to MongoDb', err));
 
@@ -75,5 +82,5 @@ async function getCourses(){
     console.log(courses);
 }
 
-// getCourses();
+getCourses();
 // createCourse();  
