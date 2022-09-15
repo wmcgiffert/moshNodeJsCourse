@@ -52,5 +52,6 @@ async function getCourses(){
 async function run(){
     const courses = await getCourses();
     console.log(courses);
+    
 }
 run();
