@@ -15,18 +15,38 @@ const courseSchema = new mongoose.Schema({
     author: String,
     tags: [String],
     date: {type: Date, default: Date.now},
-    isPublished: Boolean
+    isPublished: Boolean,
+    price: Number
 });
 
 const Course = mongoose.model('Course', courseSchema);
 
-async function getCourses(){
-    const courses = await Course
-    .find({tags:'backend', isPublished: true})
-    .sort({name:1})
-    .select('name author');
+// async function getCourses(){
+//     const courses = await Course
+//     .find({tags:'backend', isPublished: true})
+//     .sort({name:1})
+//     .select('name author');
 
-    console.log(courses);
+//     console.log(courses);
+// }
+// async function getCourses(){
+//     const courses = await Course
+//     .find({tags:{$in:['frontend','backend']}, isPublished: true})
+//     .sort({price:-1})
+//     .select('name author price');
+
+//     console.log(courses);
+// }
+
+async function getCourses(){
+    return await Course
+    .find({price:{$gt:10}})
+    .sort('-price')
+    .select('name author price')
 }
 
-getCourses();
+async function run(){
+    const courses = await getCourses();
+    console.log(courses);
+}
+run();

@@ -53,7 +53,7 @@ async function createCourse(){
         name: 'Mosh Node.js Course',
         author: 'Garrett',
         tags: ['react', 'frontend'],
-        isPublished: true
+        isPublished: true,
     });
 
     const result = await course.save();
