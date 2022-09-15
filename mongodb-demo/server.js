@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 
 
 
-
 const currentDB = 'mongo-exercise';
 
 const db = 'mongodb+srv://wgmMoshApp:wgmMoshApp@mernmoshapp.bxgpy2d.mongodb.net/' + currentDB
@@ -23,10 +22,9 @@ const Course = mongoose.model('Course', courseSchema);
 
 async function getCourses(){
     const courses = await Course
-    .find({tags:'backend'})
+    .find({tags:'backend', isPublished: true})
     .sort({name:1})
-    // .select({name:1, author:1});
-    .count();
+    .select('name author');
 
     console.log(courses);
 }
