@@ -93,19 +93,26 @@ async function updateCourse(id) {
     // //     isPublished: true,
     // //     author: 'Jake',
     // // });
-    const result = await Course.updateOne({_id:id},
+    const result = await Course.findByIdAndUpdate(id,
         {$set:{
-            author: 'Mosh', 
+            author: 'Jake', 
             isPublished: false
         }
-    });
+    },{new: true});
 
 
 
     // const result = await course.save();
     console.log(result);
 }
+async function removeCourse(id) {
+    // const result = await Course.deleteOne({ _id:id });
+    const course = await Course.findByIdAndRemove(id);
+    if(!course) return console.log(id + " was not found");
+    console.log(result);
+}
 
-updateCourse('6323b9994fceafe85d88b4ce');
+removeCourse('6323b9994fceafe85d88b4ce');
+// updateCourse('6323b9994fceafe85d88b4ce');
 // getCourses();
 // createCourse();  
