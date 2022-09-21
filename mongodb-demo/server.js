@@ -11,7 +11,7 @@ mongoose.connect(db)
     .catch(err => console.error('Could not connect to MongoDb', err));
 
 const courseSchema = new mongoose.Schema({
-    name: String,
+    name: {type: String, required: true},
     author: String,
     tags: [String],
     date: {type: Date, default: Date.now},
@@ -49,8 +49,19 @@ async function getCourses(){
     .select('name author price')
 }
 
+async function createCourse(){
+    const course = new Course({
+        author: 'Garrett',
+        tags:['Node.js','Backend'],
+        isPublished:false
+    });
+    const result = await course.save();
+    console.log(result);
+}
+
 async function run(){
-    const courses = await getCourses();
+    const courses = await createCourse();
+    // const courses = await getCourses();
     console.log(courses);   
 }
 run();
