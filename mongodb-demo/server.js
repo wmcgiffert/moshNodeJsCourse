@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const currentDB = 'mongo-exercise';
 
-const db = 'mongodb+srv://wgmMoshApp:wgmMoshApp@mernmoshapp.bxgpy2d.mongodb.net/' + currentDB
+const db = 'mongodb+srv://wgmMosh:ABGMfurman02@cluster0.m8lgd0h.mongodb.net/test' + currentDB
 
 mongoose.connect(db)
     .then(() => console.log('Connected to MongoDB....'))
